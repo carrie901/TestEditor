@@ -36,9 +36,13 @@ namespace Summer.Skill
             // 所有需要调用OnUpdate(dt)方法的入口
             Debug.Log("---------------------必须项-->初始化UpdateGameObject-------------------");
             ConfigManager.Init();
+            GameObject go = new GameObject();
+            UpdateGameObject comp = go.AddComponent<UpdateGameObject>();
+            GameObject.DontDestroyOnLoad(go);
         }
 
         #region 属性
+
 
 
 
@@ -52,10 +56,9 @@ namespace Summer.Skill
 
         }
 
-        // Update is called once per frame
-        void Update()
+        void OnApplicationQuit()
         {
-
+            LogManager.Quit();
         }
 
         #endregion

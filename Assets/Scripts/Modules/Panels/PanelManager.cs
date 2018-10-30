@@ -62,7 +62,7 @@ public class PanelManager : MonoBehaviour
 
     public void OpenSeq()
     {
-        _main.SetActive(false);
+        _main.SetActive(true);
         _seqNode.SetActive(true);
 
     }

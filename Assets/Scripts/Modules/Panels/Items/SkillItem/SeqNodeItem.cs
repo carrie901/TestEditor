@@ -21,43 +21,14 @@
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //                 			 佛祖 保佑             
 
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SeqNodeItem : MonoBehaviour
+public abstract class SeqNodeItem : MonoBehaviour
 {
-
-    #region 属性
-
-    public EdNode _node;
-
-    #endregion
-
-    #region MONO Override
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    #endregion
-
     #region Public
 
-
-
-    #endregion
-
-    #region Private Methods
-
-
+    public abstract void Add(TrackLineInfo info);
+    public abstract SeqNodeInfo Get();
 
     #endregion
 }

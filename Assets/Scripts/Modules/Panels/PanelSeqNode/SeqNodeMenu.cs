@@ -49,7 +49,7 @@ public class SeqNodeMenu : MonoBehaviour
 
     public void OnClick(GameObject go)
     {
-        EventBus.RaiseEvent(PanelSeqNode.SELECT_MENU, _menu.text);
+        EventBus.RaiseEvent(PanelConst.SELECT_MENU, _menu.text);
     }
 
     #endregion

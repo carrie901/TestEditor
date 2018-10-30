@@ -32,10 +32,7 @@ public class PanelSeqNode : MonoBehaviour
 
     #region
 
-    public const string SELECT_MENU = "PanelSeqNode SELECT_MENU";
-    public const string SELECT_DES = "PanelSeqNode SELECT_DES";
-    public const string SURE_SELECT = "PanelSeqNode SURE_SELECT";
-
+    
     #endregion
 
     #region 属性
@@ -60,14 +57,14 @@ public class PanelSeqNode : MonoBehaviour
 
     void OnDisable()
     {
-        EventBus.UnRegisterHandler(SELECT_MENU, OnSelectMenu);
-        EventBus.UnRegisterHandler(SELECT_DES, OnSelectDes);
+        EventBus.UnRegisterHandler(PanelConst.SELECT_MENU, OnSelectMenu);
+        EventBus.UnRegisterHandler(PanelConst.SELECT_DES, OnSelectDes);
     }
 
     void OnEnable()
     {
-        EventBus.RegisterHandler(SELECT_MENU, OnSelectMenu);
-        EventBus.RegisterHandler(SELECT_DES, OnSelectDes);
+        EventBus.RegisterHandler(PanelConst.SELECT_MENU, OnSelectMenu);
+        EventBus.RegisterHandler(PanelConst.SELECT_DES, OnSelectDes);
     }
 
     #endregion
@@ -76,7 +73,7 @@ public class PanelSeqNode : MonoBehaviour
 
     public void SureClick(GameObject go)
     {
-        EventBus.RaiseEvent(PanelSeqNode.SURE_SELECT, _selectCnf);
+        EventBus.RaiseEvent(PanelConst.SURE_SELECT, _selectCnf);
         CancelClick(null);
     }
 

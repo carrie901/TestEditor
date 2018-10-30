@@ -27,20 +27,29 @@ using System.Collections.Generic;
 /// <summary>
 /// 
 /// </summary>
-[Serializable]
 public class TrackLineInfo
 {
     public int _sFrame;                                        // 开始的帧数 以0作为起点
     public int _eFrame;                                        // 
+    public string _des = "描述信息";
     public List<SeqNodeInfo> _nodes = new List<SeqNodeInfo>();
+
+    public TrackLineInfo()
+    {
+        _sFrame = 0;
+        _eFrame = 1;
+    }
+
+    public void AddNode(SeqNodeInfo info)
+    {
+        _nodes.Add(info);
+    }
 
     public virtual string ToDes()
     {
         return string.Empty;
     }
 }
-
-[Serializable]
 public class SeqNodeInfo
 {
     public virtual string ToDes()
@@ -49,7 +58,6 @@ public class SeqNodeInfo
     }
 }
 
-[Serializable]
 public class PlayAnimInfo : SeqNodeInfo
 {
     public string AnimName;

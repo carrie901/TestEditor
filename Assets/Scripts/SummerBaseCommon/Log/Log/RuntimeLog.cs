@@ -26,37 +26,37 @@ namespace Summer
 
         public void Log(string message)
         {
-            lines.Add(string.Format("[Log]:<color=#ffffff>  {0}</color>", message));
+            _lines.Add(string.Format("[Log]:<color=#ffffff>  {0}</color>", message));
             LimitLogCount();
         }
 
         public void Log(string message, params object[] args)
         {
-            lines.Add(string.Format("[Log]:<color=#ffffff>  {0}</color>", string.Format(message, args)));
+            _lines.Add(string.Format("[Log]:<color=#ffffff>  {0}</color>", string.Format(message, args)));
             LimitLogCount();
         }
 
         public void Waring(string message)
         {
-            lines.Add(string.Format("[Warning]:<color=#ffffff>  {0}</color>", message));
+            _lines.Add(string.Format("[Warning]:<color=#ffffff>  {0}</color>", message));
             LimitLogCount();
         }
 
         public void Warning(string message, params object[] args)
         {
-            lines.Add(string.Format("[Warning]:<color=#ffffff>  {0}</color>", string.Format(message, args)));
+            _lines.Add(string.Format("[Warning]:<color=#ffffff>  {0}</color>", string.Format(message, args)));
             LimitLogCount();
         }
 
         public void Error(string message)
         {
-            lines.Add(string.Format("[ERROR]:<color=#ff0000>  {0}</color>", message));
+            _lines.Add(string.Format("[ERROR]:<color=#ff0000>  {0}</color>", message));
             LimitLogCount();
         }
 
         public void Error(string message, params object[] args)
         {
-            lines.Add(string.Format("[ERROR]:<color=#ff0000>  {0}</color>", string.Format(message, args)));
+            _lines.Add(string.Format("[ERROR]:<color=#ff0000>  {0}</color>", string.Format(message, args)));
             LimitLogCount();
         }
 
@@ -77,55 +77,55 @@ namespace Summer
 
         #endregion
 
-        public int max_logs = 1000;
+        public int _maxLogs = 1000;
 
 
-        protected readonly List<string> lines = new List<string>();
-        protected Vector2 scroll_position;
-        protected bool visible;
-        const string WINDOW_TITLE = "Console";
-        readonly Rect title_bar_rect = new Rect(0, 0, 1000, 40);
-        Rect window_rect = new Rect(20, 20, Screen.width - (20 * 2), Screen.height - (20 * 2));
+        protected readonly List<string> _lines = new List<string>();
+        protected Vector2 _scrollPosition;
+        protected bool _visible;
+        const string WindowTitle = "Console";
+        readonly Rect _titleBarRect = new Rect(0, 0, 1000, 40);
+        Rect _windowRect = new Rect(20, 20, Screen.width - (20 * 2), Screen.height - (20 * 2));
 
         void OnGUI()
         {
             if (GUI.Button(new Rect(5, 5, 60, 40), "Console"))
-                visible = !visible;
+                _visible = !_visible;
 
-            if (visible)
+            if (_visible)
             {
-                window_rect = GUILayout.Window(123456, window_rect, DrawConsoleWindow, WINDOW_TITLE);
+                _windowRect = GUILayout.Window(123456, _windowRect, DrawConsoleWindow, WindowTitle);
             }
 
             Color c = GUI.color;
         }
 
-        public void DrawConsoleWindow(int window_id)
+        public void DrawConsoleWindow(int windowId)
         {
 
-            scroll_position = GUILayout.BeginScrollView(scroll_position);
-            int length = lines.Count;
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
+            int length = _lines.Count;
             for (var i = 0; i < length; i++)
-                GUILayout.Label(lines[i]);
+                GUILayout.Label(_lines[i]);
 
             GUILayout.EndScrollView();
             GUI.contentColor = Color.white;
             //
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("清除"))
-                lines.Clear();
+                _lines.Clear();
             GUILayout.EndHorizontal();
             // 拖拽活动区域
-            GUI.DragWindow(title_bar_rect);
+            GUI.DragWindow(_titleBarRect);
         }
 
         public void LimitLogCount()
         {
-            int amount_to_remove = Mathf.Max(lines.Count - max_logs, 0);
+            int amountToRemove = Mathf.Max(_lines.Count - _maxLogs, 0);
 
-            if (amount_to_remove == 0)
+            if (amountToRemove == 0)
                 return;
-            lines.RemoveRange(0, amount_to_remove);
+            _lines.RemoveRange(0, amountToRemove);
         }
     }
 }

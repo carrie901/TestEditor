@@ -39,7 +39,7 @@ namespace Summer
         public TrackLineItem _trackLinePfb;                         // TrackLine的预设
 
         public List<TrackLineItem> _trackItems;
-
+        public SequenceInfo _info;
         #endregion
 
         #region MONO Override
@@ -47,16 +47,19 @@ namespace Summer
         void Awake()
         {
             _init();
+            _info = new SequenceInfo();
         }
 
         void OnDisable()
         {
             EventBus.UnRegisterHandler(PanelConst.SELECT_TRACKLINE, OnSelectTrackLine);
+            EventBus.UnRegisterHandler(PanelConst.ADD_TRACKLINE, OnAddTrickLine);
         }
 
         void OnEnable()
         {
             EventBus.RegisterHandler(PanelConst.SELECT_TRACKLINE, OnSelectTrackLine);
+            EventBus.RegisterHandler(PanelConst.ADD_TRACKLINE, OnAddTrickLine);
         }
 
         #endregion
@@ -65,9 +68,7 @@ namespace Summer
 
         public void AddTrackLine()
         {
-            TrackLineItem item = Instantiate(_trackLinePfb);
-            GameObjectHelper.SetParent(item.gameObject, _trackLinesParent);
-            _trackItems.Add(item);
+
         }
 
         public void RemoveTrackLine(TrackLineItem item)
@@ -90,12 +91,12 @@ namespace Summer
 
         public void OnClickAddTrack(GameObject go)
         {
-            AddTrackLine();
+            EventBus.RaiseEvent(PanelConst.ADD_TRACKLINE, new TrackLineInfo());
         }
 
         public void OnClickSave(GameObject go)
         {
-
+            SequenceProxy.Instance.Save(_info);
         }
 
         public void OnAddSeq(GameObject go)
@@ -110,6 +111,16 @@ namespace Summer
         public void OnSelectTrackLine(System.Object obj)
         {
 
+        }
+
+        public void OnAddTrickLine(System.Object obj)
+        {
+            TrackLineInfo info = obj as TrackLineInfo;
+            TrackLineItem item = Instantiate(_trackLinePfb);
+            item.Set(info);
+            GameObjectHelper.SetParent(item.gameObject, _trackLinesParent);
+            _trackItems.Add(item);
+            _info.AddTrackLine(info);
         }
 
         #endregion

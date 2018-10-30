@@ -110,6 +110,11 @@ namespace Summer
             string path = Application.persistentDataPath;
 #endif
 
+#if UNITY_STANDALONE_OSX
+            path = Application.dataPath;
+#endif
+
+
             int index = path.LastIndexOf('/');
             path = path.Substring(0, index);
             path = path + FILEPATH;

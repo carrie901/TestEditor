@@ -1,6 +1,6 @@
-1,Animation,PlayAnimation,播放动画,PlayAnimationAction
-2,Other,PlayEffect,播放特效,PlayEffectAction
-3,Sound,PlaySound,播放声音,PlaySoundAction
+1,Animation,PlayAnimation,播放动画,PlayAnimItem
+2,Other,PlayEffect,播放特效,PlayEffectItem
+3,Sound,PlaySound,播放声音,PlaySoundItem
 4,Move,MoveToTargetBySpeed,以一定速度移动到目标地点,
 5,Move,MoveToTargetByTime,以一定时间移动到目标地点,
 6,Attack,FindTarget,找到最近目标,

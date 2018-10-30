@@ -63,7 +63,7 @@ public class SeqNodeDes : MonoBehaviour
     public void OnClick(GameObject go)
     {
         Debug.AssertFormat(_cnf != null, "选中的Des为空:[{0}]", gameObject.name);
-        EventBus.RaiseEvent(PanelSeqNode.SELECT_DES, _cnf);
+        EventBus.RaiseEvent(PanelConst.SELECT_DES, _cnf);
     }
 
     #endregion

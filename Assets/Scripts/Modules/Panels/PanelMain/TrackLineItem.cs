@@ -39,6 +39,11 @@ public class TrackLineItem : MonoBehaviour
         UIEventListener.Get(gameObject).OnClick += OnClick;
     }
 
+    public void Set(TrackLineInfo info)
+    {
+        _info = info;
+    }
+
     private void OnClick(GameObject obj)
     {
         EventBus.RaiseEvent(PanelConst.SELECT_TRACKLINE, _info);

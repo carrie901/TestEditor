@@ -26,21 +26,10 @@ namespace Summer
 
         public static bool OpenDebug = true;
 
-        public static bool ErrorLog = false;                       // 网络的错误日志
-
-        public static bool _openNet = true;
-        public static bool _openDebugBuff = false;
-        public static bool _openDebugEffect = true;
-        public static bool _openLoadRes = true;
-        public static bool _openPanel = true;
-        public static bool _openSkill = true;
-        public static bool _opneEntityAction = true;
-        public static bool _animation = true;
-
         /// <summary>
         /// 能显示的级别
         /// </summary>
-        public static int _errorLevel = ASSET;   // none=0,log=1,waring=2,error=3,asset=4
+        public static int _errorLevel = NONE;   // none=0,log=1,waring=2,error=3,asset=4
 
         #region 日志级别
 
@@ -64,11 +53,10 @@ namespace Summer
 
         static LogManager()
         {
-#if UNITY_EDITOR
-            //_pipelines.Add(FileLog.Instance);
-            _pipelines.Add(StringBuilderLog.Instance);
+#if LOG
             _pipelines.Add(UnityLog.Instance);
-            //_pipelines.Add(RuntimeLog.Instance);
+            _pipelines.Add(RuntimeLog.Instance);
+            _pipelines.Add(FileLog.Instance);
 #endif
             //Debug.logger.logEnabled = !IgnoreUnityDebug;
 
